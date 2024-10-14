@@ -378,3 +378,16 @@ func (c *Client) Version(ctx context.Context) (string, error) {
 
 	return version.Version, nil
 }
+
+// GPU returns the Ollama server gpu as a string.
+func (c *Client) GPU(ctx context.Context) (string, error) {
+	var gpu struct {
+		GPU string `json:"gpu"`
+	}
+
+	if err := c.do(ctx, http.MethodGet, "/api/gpu", nil, &gpu); err != nil {
+		return "", err
+	}
+
+	return gpu.GPU, nil
+}

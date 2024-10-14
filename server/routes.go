@@ -1144,6 +1144,9 @@ func (s *Server) GenerateRoutes() http.Handler {
 		r.Handle(method, "/api/version", func(c *gin.Context) {
 			c.JSON(http.StatusOK, gin.H{"version": version.Version})
 		})
+		r.Handle(method, "/api/gpu", func(c *gin.Context) {
+			c.JSON(http.StatusOK, gin.H{"gpu": gpu.GetGPUInfo()})
+		})
 	}
 
 	return r

@@ -1263,6 +1263,25 @@ func versionHandler(cmd *cobra.Command, _ []string) {
 	if serverVersion != version.Version {
 		fmt.Printf("Warning: client version is %s\n", version.Version)
 	}
+
+	gpuVersion, err := client.GPU(cmd.Context())
+	if err != nil {
+		fmt.Println("gpu not there")
+	}
+	if gpuVersion != "" {
+		fmt.Printf("ollama version is %s\n", gpuVersion)
+	}
+	//if len(cudaGPUs) != 0 {
+	//	fmt.Printf("cudaGPUs Len is %s\n", len(cudaGPUs))
+	//}
+//
+	//if len(rocmGPUs) != 0 {
+	//	fmt.Printf("rocmGPUs Len is %s\n", len(rocmGPUs))
+	//}
+//
+	//if len(oneapiGPUs) != 0 {
+	//	fmt.Printf("oneapiGPUs Len is %s\n", len(oneapiGPUs))
+	//}
 }
 
 func appendEnvDocs(cmd *cobra.Command, envs []envconfig.EnvVar) {
